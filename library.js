@@ -84,16 +84,45 @@ function printBook(book) {
   }
 }
 
-function printBookDetails() {
+
+
+function addBook() {
+  const title = document.getElementById('title').value;
+  alert(title);
 
 }
+
+//Test
+
+function getInputValue(){
+  // Selecting the input element and get its value 
+  var inputVal = document.getElementById("myInput").value;
+  
+  // Displaying the value
+  alert(inputVal);
+}
+// Event Listeners
+
+const button = document.querySelector('.new-book-button');
+const form = document.querySelector('.new-book-form')
+button.addEventListener('click', () => {
+  form.classList.toggle('hidden'); 
+  });
+
+  const submit = document.querySelector('.submit');
+  submit.addEventListener('click', addBook());
+
+
+  // Driver Script
 
 const book1 = new Book("Lord of the Rings", "J.R.R. Tolkien", "1046", "read");
 
 console.log(book1.info());
 
-//addBookToLibrary();
+
 
 console.log(myLibrary);
 
 printLibrary();
+
+
