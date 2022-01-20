@@ -3,7 +3,8 @@
 //Write a constructor for making “Book” objects. We will revisit this in the project at the end of this lesson. 
 //Your book objects should have the book’s title, author, the number of pages, and whether or not you have read the book.
 
-
+// To Do: Convert library into a function and wrap all values under it
+// To Do: Start with books table already existing. And then simply add rows
 
 
 let myLibrary = [
@@ -34,25 +35,16 @@ function Book(title, author, numberOfPages, read) {
   this.info = function () {
     return title + " by " + author + ", " + numberOfPages + " pages, " + this.beenread();
   }
-}
-
-
-function addBookToLibrary() {
-  let title = window.prompt("Please enter the book's title: ");
-  let author = prompt("Please enter the book's author");
-  let pages = prompt("Please enter the number of pages");
-  let read = prompt("Have you read this book?");
-  let book = new Book(title, author, pages, read);
-  console.log(book);
-  myLibrary.push(book);
+  this.addToLibrary = function () {
+    myLibrary.push(this);
+    console.log("Book Added");
+  }
 }
 
 function printLibrary(){
   printBookTable();
   myLibrary.forEach(printBook);
 }
-
-
 
 function printBookTable(){
   const booksContainer = document.querySelector('.books-container');
@@ -75,42 +67,42 @@ function printBook(book) {
   const booksContainer = document.querySelector('.book-table');
   const bookRow = document.createElement('tr');
   booksContainer.appendChild(bookRow);
+  console.log(book);
+  let bookDetails = Object.values(book)
   // Need to then loop through the object and create a TD field for key/value pair
-  for (const detail in book) {
+  for (let i = 0; i <= 3; i++) {
     const bookDetail = document.createElement('td');
-    bookDetail.textContent = book[detail];
+    bookDetail.textContent = bookDetails[i];
     bookRow.appendChild(bookDetail);
-    console.log(book[detail]);
+    console.log(bookDetails[i]);
   }
 }
 
 
 
 function addBook() {
-  const title = document.getElementById('title').value;
-  alert(title);
-
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const numberOfPages = document.querySelector("#pages").value;
+  const read = document.querySelector("#read").value;
+  const newBook = new Book(title, author, numberOfPages, read);
+  newBook.addToLibrary();
+  printLibrary();
 }
 
-//Test
-
-function getInputValue(){
-  // Selecting the input element and get its value 
-  var inputVal = document.getElementById("myInput").value;
-  
-  // Displaying the value
-  alert(inputVal);
-}
 // Event Listeners
 
 const button = document.querySelector('.new-book-button');
 const form = document.querySelector('.new-book-form')
 button.addEventListener('click', () => {
   form.classList.toggle('hidden'); 
+  console.log("activated");
   });
 
+
+  // Submit Book
   const submit = document.querySelector('.submit');
-  submit.addEventListener('click', addBook());
+  submit.addEventListener('click', addBook);
 
 
   // Driver Script
