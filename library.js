@@ -7,12 +7,17 @@
 let myLibrary = [];
 
 
-function Book(library, title, author, numberOfPages, read) {
+class Book {
+
+  constructor(library, title, author, numberOfPages, read) {
   this.title = title;
   this.author = author;
   this.numberOfPages = numberOfPages;
   this.read = read;
-  this.beenread = function() {
+  this.library = library;
+  }
+
+  beenread() {
     switch (read) {
       case "yes":
         return "read";
@@ -21,24 +26,23 @@ function Book(library, title, author, numberOfPages, read) {
     }
   }
 
-  this.addToLibrary = function () {
-    library.push(this);
+  addToLibrary() {
+    this.library.push(this);
   }
-}
 
-Book.prototype.printBook = function() {
-  const booksContainer = document.querySelector('.book-table');
-  const bookRow = document.createElement('tr');
-  booksContainer.appendChild(bookRow);
-  let bookDetails = Object.values(this)
-  for (let i = 0; i <= 3; i++) {
-    const bookDetail = document.createElement('td');
-    bookDetail.textContent = bookDetails[i];
-    bookRow.appendChild(bookDetail);
-}}
+  printBook(){
+    const booksContainer = document.querySelector('.book-table');
+    const bookRow = document.createElement('tr');
+    booksContainer.appendChild(bookRow);
+    let bookDetails = Object.values(this)
+    for (let i = 0; i <= 3; i++) {
+      const bookDetail = document.createElement('td');
+      bookDetail.textContent = bookDetails[i];
+      bookRow.appendChild(bookDetail);
+  }
+  }
 
-
-
+};
 
 // Event Listeners
   //New Book 
